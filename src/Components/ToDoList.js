@@ -1,7 +1,8 @@
 import React from 'react';
-import { ToDo } from '../index';
 
-export const ToDoList = ({todos, onTodoClick }) => (
+import { ToDo } from './ToDo';
+
+export const ToDoList = ({todos, onTodoClick, onSortClick, onResetClick }) => (
 	<ul>
 		{todos.map(t =>
 			<ToDo key={t.id}
@@ -9,6 +10,8 @@ export const ToDoList = ({todos, onTodoClick }) => (
 				onClick={() => onTodoClick(t.id)} 
 			/>
 		)}
+		<button onClick={ () => onSortClick()}>Sort alphabetically</button>
+		<button onClick={ () => onResetClick()}>Reset Sorting</button>
 	</ul>
 );
 

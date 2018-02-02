@@ -1,7 +1,6 @@
 // ACTION CREATORS
 // ========================
-// this fn is dispatched from AddToDo Component, instead of ...
-// using the component to deal with incrementing nextId, do logic in action creators
+
 let nextId = 0;
 export const addTodo = (text) => {
 	return{
@@ -23,4 +22,16 @@ export const toggleTodo = (id) => {
 		type: "TOGGLE_TODO",
 		id
 	};
+};
+export const sortItems = (text) => {
+	return {
+		type: "SORT_ITEMS",
+		text
+	}
+};
+export const resetSorting = (id) => {
+	return {
+		type: "RESET_SORTING",
+		id
+	}
 };

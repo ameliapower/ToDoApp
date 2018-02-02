@@ -1,13 +1,12 @@
 import React from 'react';
 
-// Link Functional Component - only concerned with look
 export const Link = ({
-	children, // contents of link 
+	children, // contents of Link 
 	active,
 	onClick 
 }) => {
-	if(active){ // if current then just show text as plain without link
-		return <span>{children}</span>
+	if(active){ // if current, then just show text as plain without link
+		return <span className="active">{children}</span>
 	}
 	return (
 		<button onClick={ e => {

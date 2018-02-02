@@ -34,7 +34,23 @@ export const todos = (state=[], action) => {
 				todo(undefined, action) //calling todo fn from our todo reducer above
 			]; 
 		case "TOGGLE_TODO" :
-			return state.map(t => todo(t, action)); //on each item in array, call the todo reducer
+			return state.map(t => todo(t, action)); //on each item in array, call the toggle reducer
+		case "SORT_ITEMS" :
+			return state.slice().sort((a, b) => { //avoid mutation by making a copy with slice before sorting. (Sorting is a mutating method)
+			    var textA = a.text.toLowerCase(),
+			    	textB = b.text.toLowerCase();
+			    if (textA < textB)
+			      return -1;
+			    if (textA > textB)
+			      return 1;
+			});
+		case "RESET_SORTING" : //sort by id
+			return state.slice().sort((a,b) => {
+				var firstId = a.id;
+				var lastId = b.id;
+				if(firstId > lastId)
+					return 1;
+			});
 		default:
 			return state;
 	} 

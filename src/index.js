@@ -3,83 +3,34 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux'; 
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 
-import { addTodo } from './actions'; //, setVisibilityFilter, toggleTodo
-import { todo, todoApp } from './store/reducers';
+import { todoApp } from './store/reducers';
+import { AddTodoContainer } from './Containers/AddTodo';
 import { VisibleToDoList } from './Containers/ToDoList';
-import { FilterLink } from './Containers/Link';
+import { Footer } from './Components/Footer';
 
 
-
-// COMPONENTS - move to components folder
-// =========================================
-// ToDo Component
-export const ToDo = ({ 
-	onClick,
-	completed, //state explicitly data component needs to render
-	text 
-}) => (
-	<li key={todo.id} onClick={onClick} 
-		style = {{ textDecoration : completed ?
-				'line-through' : 'none' }}>
-		{text} 
-	</li>
-);
+// SUGGESTIONS:
+// ================
+// separate out the parts /\
+// output id /\
+// cannot submit if empty /\
+// add sorting /\
+// save to localStorage
+// remove tasks onClick
+// display a number of tasks remaining in active list
+// add a due date option
+// assign task to user
+// add toaster notifications
 
 
-// AddTodo functional component
-// functional components don't have instances, so cannot use "this", so adding variable input that we can refernce instead of using this.input as in previous version when it was in the class component
-let nextId = 0;
-let AddTodo = ({ dispatch }) => {
-	let input;
-	return (
-		<div>
-			<input type="text" ref={node => {
-					input = node;
-				}} />
-			<button onClick={ () => {
-				dispatch(addTodo(input.value)) 
-				input.value = ""; 
-			}}> Add a todo
-			</button>
-		</div>
-	);
-};
-
-AddTodo = connect()(AddTodo);  //make container
- 
-
-
-//Footer Component containing FilterLink Component		
-const Footer = ({ store }) => {
-	return(
-		<p>
-			<span>Show:</span> 
-			{''}
-			<FilterLink filter='SHOW_ALL' store={store} >
-				<span>All</span>
-			</FilterLink>
-			{''}
-			<FilterLink filter='SHOW_ACTIVE' store={store} >
-				<span>Active</span> 
-			</FilterLink>
-			{''}
-			<FilterLink filter='SHOW_COMPLETED' store={store}>
-				<span>Completed</span>
-			</FilterLink>
-		</p>
-	);
-}
-
-
-
-// TodoApp Component
+// TodoApp is the root Component
 const TodoApp = () => (
 	/* ref in react can be a string or a callback function
 	when a fn ref gets the underlying DOM element (node) */ 
 	<div id ="todo">		
-		<AddTodo  />
+		<AddTodoContainer  />
 		<VisibleToDoList />
 		<Footer />
 	</div>
